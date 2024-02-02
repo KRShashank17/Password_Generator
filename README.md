@@ -1,8 +1,10 @@
 # React + Vite
+* `useCallback` - used to memoize passwordgenerator function
+* `useEffect` - used to render passwordgenerator() component whenever its dependencies i.e [ length, number allowed, special characters allowed ] changes
+  
+![image](https://github.com/KRShashank17/Password_Generator/assets/108650155/d9e64954-7346-48c0-9b25-e9c937d54c6c)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+* `useRef` - used to access DOM element (password field) directly , with added select() effect is visually appealing
 
-Currently, two official plugins are available:
+![image](https://github.com/KRShashank17/Password_Generator/assets/108650155/04440078-88af-4ab1-bcb2-95ca56119422)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
