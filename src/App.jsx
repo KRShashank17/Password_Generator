@@ -1,10 +1,25 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 function App() {
   const [length, setLength] = useState(8);
   const [numberAllowed, setNumberAllowed] = useState(false);
   const [charAllowed, setCharAllowed] = useState(false);
   const [password, setPassword] = useState("");
+
+  const passwordgenerator = useCallback(()=>{
+    let pass = "";
+    let str = "ABCDEFGHIJKLMNOPQRSTUVWXYabcdefghijklmnopqrstuvwxyz";
+    if (numberAllowed) str += "0123456789";
+    if (charAllowed) str += "!@#$%^&*()_+~`{}";
+    for (let i = 0; i < length; i++) {
+      pass += str.charAt(Math.floor(Math.random() * str.length ));
+    }
+    setPassword(pass);
+  } , [length, numberAllowed ,charAllowed, setPassword]);
+
+  useEffect(()=>{
+    passwordgenerator()
+  },[length , numberAllowed, charAllowed , setPassword])
 
   return (
     <div className="w-full max-w-md mx-auto shadow-md rounded-lg px-4 py-3 my-8 bg-gray-800 text-orange-500">
@@ -30,8 +45,9 @@ function App() {
         min={8}
         max={50}
         value={length}
-         className='cursor-pointer'
-          />
+        className='cursor-pointer'
+        onChange={(e)=>setLength(e.target.value)}                 //! working of range slider
+        />
           <label>Length: {length}</label>
       </div>
       <div className="flex items-center gap-x-1">
@@ -39,6 +55,7 @@ function App() {
           type="checkbox"
           defaultChecked={numberAllowed}
           id="numberInput"
+          onChange = {()=>{setNumberAllowed((prev)=> !prev)}}     //! imp
       />
       <label htmlFor="numberInput">Numbers</label>
       </div>
@@ -47,6 +64,9 @@ function App() {
               type="checkbox"
               defaultChecked={charAllowed}
               id="characterInput"
+              onChange = {()=>{
+                setCharAllowed((prev)=> !prev)                    //! imp
+              }}
           />
           <label htmlFor="characterInput">Characters</label>
       </div>
